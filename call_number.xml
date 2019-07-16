@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf=8" ?>
+<keys>
+  <phoneXtensions>
+    <key keyNumber="12" label="action">
+      <keyConfiguration>
+        <lua>
+          <code>
+c = {number=71}
+
+local function call()
+  --[[ call number from table ]]--
+  sip.invite( c.number )
+end
+
+local function http_callback( uri, body, headers, vars )
+  for k, v in string.gmatch( vars["query_string"], "(%w+)=(%w+)") do
+    --[[ read potential number from query string - this feature requires api from release 1.2 ]]--
+    c[k] = v
+  end
+  call()
+end
+
+function onKeyUp()
+  call()
+end
+
+http.listen( "call", http_callback)
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+  </phoneXtensions>
+</keys>

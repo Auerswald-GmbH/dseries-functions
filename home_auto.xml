@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf=8" ?>
+<!--
+  a key that connects to a http power outlet and toggles the power switch.
+  it is triggerd every minute to poll the power outlets state.
+-->
+<keys>
+  <extensionModule1>
+    <key keyNumber="11" label="FAN">
+      <keyConfiguration>
+        <lua>
+          <code>
+-- uri to query the power outlet
+local base_uri = "http://192.168.1.9/"
+
+local function http_callback( code, body, headers )
+  local b = xml.eval(body)
+  local led1 = b:find("led1")
+  local ledstr = led1[1]
+  local on = tonumber(ledstr) > 0
+
+  if on then
+    key.setLed( "green" )
+  else 
+    key.setLed( "off" )
+  end
+end
+
+local function fetch_state()
+  http.get(base_uri.."status.xml", http_callback)
+end
+
+local function http_in_callback( code, body, headers )
+  if code == 200 then
+    fetch_state()
+  end
+end
+
+local function timetick()
+  -- fetch state
+  fetch_state()
+end
+
+function onKeyUp()
+  http.get(base_uri.."leds.cgi?led=1", http_in_callback)
+end
+
+time.register( timetick )
+fetch_state()
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+  </extensionModule1>
+</keys>

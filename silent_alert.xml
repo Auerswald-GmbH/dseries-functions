@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  this key shows several api elements
+  * the config is modified to enhance the display brightness
+  * time is used to modify the handling
+  * a dialog is shown to inform the phones user
+  * a sip subscription is used as a trigger
+  * a http request is sent as an acknowledgement
+-->
+<keys>
+  <extensionModule1>
+    <key keyNumber="13" label="ALERT">
+      <keyConfiguration>
+        <lua>
+          <code>
+local brightness = "5"
+
+local function reset()
+  print( "reset", brightness)
+  key.setLed("off")
+  config.set("/userInterface/display/brightness", brightness)
+end
+
+local function read_brightness()
+  brightness = config.get( "/userInterface/display/brightness" )
+  print( "brightness:", brightness)
+end
+
+local function notify(data, uri, handle)
+  local x = xml.eval(data)
+  if not data or not x then
+    return
+  end
+  for _,dlg in ipairs(x) do
+    state = dlg:find("state") 
+    if state and state[1] == "trying" then
+      read_brightness()
+      key.setLed("red", true )
+      -- set max brightness --
+      config.set("/userInterface/display/brightness", "7")
+      time.sleep(1)
+      dialog.show("Alert! Please leave calm and quietly");
+    elseif state and state[1] == "terminated" then
+      reset()
+      key.setLed("off" )
+    end
+  end
+end
+
+local function sub()
+  sip.subscribe(71,notify)
+end
+
+function onKeyUp()
+  http.get( "http://192.168.1.239/have_left" )
+  reset()
+end
+
+read_brightness()
+sub()
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+  </extensionModule1>
+</keys>

@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf=8" ?>
+<keys>
+  <extensionModule1>
+    <key keyNumber="21" label="100">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 90 then
+    key.setLed( "red" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+local function http_callback( uri, content, headers )
+  local value = tonumber( headers["x-value"] ) or 0
+  for _, callback in ipairs(shared) do
+    callback( value )
+  end
+end
+shared[1] = state_callback
+http.listen( "disco", http_callback)
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="31" label="100">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 90 then
+    key.setLed( "red" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[2] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="22" label="90">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 80 then
+    key.setLed( "red" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[3] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="32" label="90">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 80 then
+    key.setLed( "red" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[4] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="23" label="80">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 70 then
+    key.setLed( "orange" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[5] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="33" label="80">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 70 then
+    key.setLed( "orange" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[6] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="24" label="70">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 60 then
+    key.setLed( "green" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[7] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="34" label="70">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 60 then
+    key.setLed( "green" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[8] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="25" label="60">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 50 then
+    key.setLed( "green" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[9] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="35" label="60">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 50 then
+    key.setLed( "green" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[10] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+      <key keyNumber="26" label="50">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 40 then
+    key.setLed( "green" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[11] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="36" label="50">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 40 then
+    key.setLed( "green" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[12] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+      <key keyNumber="27" label="40">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 30 then
+    key.setLed( "green" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[13] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="37" label="40">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 30 then
+    key.setLed( "green" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[14] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+      <key keyNumber="28" label="30">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 20 then
+    key.setLed( "green" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[15] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="38" label="30">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 20 then
+    key.setLed( "green" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[16] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+      <key keyNumber="29" label="20">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 10 then
+    key.setLed( "green" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[17] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="39" label="20">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 10 then
+    key.setLed( "green" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[18] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+      <key keyNumber="30" label="10">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 0 then
+    key.setLed( "green" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[19] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="40" label="10">
+      <keyConfiguration>
+        <lua>
+          <code>
+local function state_callback( value )
+  if value > 0 then
+    key.setLed( "green" )
+  else
+    key.setLed( "off" )
+  end
+end
+
+shared[20] = state_callback
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    </extensionModule1>
+</keys>

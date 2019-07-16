@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf=8" ?>
+<configuration>
+<luaLibraries>
+  <luaLibrary name="music">
+    <code>
+local color = "green"
+if level >= 80 then
+  color = "red"
+elseif level >= 70 then
+  color = "orange"
+end
+
+local function state_callback( value )
+  if value > level then
+    key.setLed( color )
+  else
+    key.setLed( "off" )
+  end
+end
+shared[#shared + 1] = state_callback
+    </code>
+  </luaLibrary>
+</luaLibraries>
+<keys>
+  <extensionModule1>
+    <key keyNumber="21" label="100">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 90
+local music = require("music") 
+local function http_callback( uri, content, headers )
+  local value = tonumber( headers["x-value"] ) or 0
+  for _, callback in ipairs(shared) do
+    callback( value )
+  end
+end
+http.listen( "disco", http_callback)
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="31" label="100">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 90
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="22" label="90">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 80
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="32" label="90">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 80
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="23" label="80">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 70
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="33" label="80">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 70
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="24" label="70">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 60
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="34" label="70">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 60
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="25" label="60">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 50
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="35" label="60">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 50
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+      <key keyNumber="26" label="50">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 40
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="36" label="50">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 40
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+      <key keyNumber="27" label="40">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 30
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="37" label="40">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 30
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+      <key keyNumber="28" label="30">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 20
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="38" label="30">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 20
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+      <key keyNumber="29" label="20">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 10
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="39" label="20">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 10
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+      <key keyNumber="30" label="10">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 00
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    <key keyNumber="40" label="10">
+      <keyConfiguration>
+        <lua>
+          <code>
+level = 00
+local music = require("music") 
+          </code>
+        </lua>
+      </keyConfiguration>
+    </key>
+    </extensionModule1>
+</keys>
+</configuration>
